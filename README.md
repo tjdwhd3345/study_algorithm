@@ -1,6 +1,6 @@
 # study_algorithm
 
-프로그래머스 정답코드
+프로그래머스 알고리즘 정답코드
 
 문제 폴더안에는 문제 설명이 있는 README.md 파일과 정답 코드인 `solution.js` 가 있다.
 
