@@ -4,7 +4,7 @@ function solution(n) {
     Array.from({ length: n }, () => 0)
   );
 
-  const direction = ['down', 'right', 'upperRight'];
+  const direction = ['down', 'right', 'upperLeft'];
   let flag = direction[0];
   let startX = 0;
   let startY = 0;
@@ -33,7 +33,7 @@ function solution(n) {
       startX = x - 1;
       flag = direction[2];
     } else if (flag === direction[2]) {
-      // upperRIght
+      // upperLeft
       let x = startX - 1;
       let y = startY - 1;
       for (x; x > 0; x--, y--) {
