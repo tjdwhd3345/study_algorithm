@@ -1,4 +1,4 @@
-const solution = (n) => {
+function solution(n) {
   let answer = [];
   const arr = Array.from({ length: n }, () =>
     Array.from({ length: n }, () => 0)
@@ -51,12 +51,5 @@ const solution = (n) => {
       if (v !== 0) acc.push(v);
       return acc;
     }, []);
-  console.log(answer);
-};
-
-solution(4);
-solution(5);
-solution(6);
-solution(10);
-solution(15);
-solution(20);
+  return answer;
+}
