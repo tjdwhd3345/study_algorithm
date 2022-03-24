@@ -1,24 +1,25 @@
 function solution(id_list, report, k) {
-  var answer = Array.from({ length: id_list.length }).fill(0);
-  const reportObj = {};
-
-  // 신고당한 사람을 기준으로 신고자이름 리스트 생성
-  for (let i = 0; i < report.length; i++) {
-    const [reporter, reported] = report[i].split(' ');
-    if (!reportObj[reported]) reportObj[reported] = [];
-    if (!reportObj[reported].includes(reporter)) {
-      reportObj[reported].push(reporter);
+  var answer = [];
+  // report 신고내용 중복제거
+  const new_report = [...new Set(report)];
+  // 신고내용 반복문으로 신고횟수 카운트
+  const counts = new Map();
+  for (let report of new_report) {
+    const reported = report.split(' ')[1];
+    counts.set(reported, counts.get(reported) + 1 || 1);
+  }
+  // 신고횟수가 k 이상인 대상자를 신고한 사람을 세팅
+  const mailing = new Map();
+  for (let report of new_report) {
+    const [reporter, reported] = report.split(' ');
+    if (counts.get(reported) >= k) {
+      mailing.set(reporter, mailing.get(reporter) + 1 || 1);
     }
   }
-  /**
-   * 신고자이름이 k 보다 많다는 건 k번 이상 신고당한 사람임
-   * 신고한 사람의 이름 인덱스를 id리스트에서 찾아서 메일받는 횟수 반환
-   */
-  Object.keys(reportObj) //
-    .filter((key) => reportObj[key].length >= k) //
-    .forEach((v) => {
-      reportObj[v].forEach((vv) => answer[id_list.indexOf(vv)]++);
-    });
+
+  // id리스트를 반복하면서 신고한사람이 메일받는 수를 반환
+  answer = id_list.map((id) => mailing.get(id) || 0);
+
   return answer;
 }
 
